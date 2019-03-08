@@ -19,9 +19,9 @@
 
 		<div v-if="gamestate === 'starting'">
 			<div class = "screen">
-			Virtual Pet VER 1.0
-			<br> Copywright 1990
-			<br>Vagrant Dragons
+			Virtual Pet VER1.0
+			<br> Copyright 1990
+			<br>By Vagrant Dragons
 			<br>Softworks
 			<br>
 			<br>-- Press Start --
@@ -30,17 +30,17 @@
 
 		<div v-else-if="gamestate === 'choose'">
 			<div class = "screen">
-				Choose pet type: A or B
+				Choose pet type:
 				<br>
 
 				<div class = "petDisplay">
 					A
-					<br><img src = "\images/Pet_A/default.png">
+					<br><img src = "/pet_a/default1.png">
 				</div>
 
 				<div class = "petDisplay">
 					B
-					<br><img src = "\images/Pet_B/default.png">
+					<br><img src = "/pet_b/default1.png">
 				</div>
 
 			</div>
@@ -48,12 +48,31 @@
 
 		<div v-else-if="gamestate === 'bedroom'">
 			<div class = "screen mainRoom">
-			Current Status: Healthy
+			Current Status: {{pet.GetHeath()}}
+				<div id = "pet" class = "pet">
+					<img v-bind:src= "pet.image + pet.behavior + pet.currentFrame + '.png'">
+				</div>
+
+				<div class = "menuDisplay" v-for="n in menu.count" :key="n">
+					<div class = "arrow" v-if='n === menu.current'>
+						<img src="mainmenu/arrow.png">
+					</div>
+					<img v-bind:src="menu.images + n + '.png'">
+				</div>
+			</div>
+		</div>
+
+		<div v-else-if="gamestate === 'stats'">
+			<div class = "screen">
+			-- Pet Status --
+			<br>Heath : {{pet.health}}
+			<br>Happiness : {{pet.happiness}}
+			<br>Hunger : {{pet.hunger}}
 			</div>
 		</div>
 
 		<div class = "buttons">
-			<button class="buttonStart" v-on:click="pressedStart()">start</button>
+			<button class="buttonStart" v-on:click="pressedStart()">START</button>
 			<button class="buttonRound" v-on:click="pressedA()">A</button>
 			<button class="buttonRound" v-on:click="pressedB()">B</button>
 		</div>

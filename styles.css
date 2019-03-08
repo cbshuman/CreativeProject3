@@ -47,7 +47,7 @@ body
   		}
   	50% 
 		{
-    	background-size:#e00;
+    	background-color:#e00;
 		box-shadow: #000 0 -1px 7px 1px, inset #e00 0 -1px 9px, #F00 0 2px 12px;
   		}
 	100%
@@ -72,7 +72,7 @@ body
 
 .mainRoom
 	{
-	background-image:url("\images/main_background.png");
+	background-image:url("/images/main_background.png");
     background-size: cover;
 	color:#0f380f;
 	}
@@ -86,12 +86,48 @@ body
 	border: 5px solid #306230;
 	padding:5px;
 	float:left;
+	margin: 5%;
 	}
 
 .petDisplay img
 	{
 	width:64px;
 	height:64px;
+	}
+
+.pet
+	{
+	position: relative;
+	top: 132px;
+	right:-120px;
+	}
+
+.pet img
+	{
+	width:64px;
+	height:64px;
+	}
+
+.menuDisplay
+	{
+	position: relative;
+	top: 190px;
+	right: 0px;
+	}
+
+.menuDisplay img
+	{
+	width:32px;
+	height:32px;
+	float:left;
+	margin-left:5px;
+	}
+
+.arrow img
+	{
+	width:16px !important;
+	height:32px !important;
+	float:left;
 	}
 
 .buttons
