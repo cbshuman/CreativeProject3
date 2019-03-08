@@ -1,0 +1,131 @@
+body
+	{
+	font-family: 'Press Start 2P', cursive;
+	background-color:#222;
+	color:#557755;
+	}
+
+.gameboy
+	{
+	padding:1%;
+	padding-top:35px;
+	height:445px;
+	width:340px;
+	background-color:#aaa;
+	color:#8bac0f;
+	margin: 0 auto;
+	border-top: 5px solid #ccc;
+	border-bottom: 5px solid #777;
+	border-right: 5px solid #666;
+	border-left: 5px solid #bbb;
+	border-radius: 10%;
+	}
+
+.powerRegion
+	{
+	width:100%;
+	text-align: right;
+	}
+
+.power
+	{
+	height:10px;
+	width:10px;
+	background-color:#e00;
+	border-radius: 50%;
+	box-shadow: #000 0 -1px 7px 1px, inset #600 0 -1px 9px, #F00 0 2px 12px;
+	animation: ledFlash 3s infinite;
+	float: right;
+	}
+
+@keyframes ledFlash
+	{
+  	0%
+		{
+    	background-color:#900;
+		box-shadow: #000 0 -1px 7px 1px, inset #f00 0 -1px 9px, #F00 0 2px 12px;
+  		}
+  	50% 
+		{
+    	background-size:#e00;
+		box-shadow: #000 0 -1px 7px 1px, inset #e00 0 -1px 9px, #F00 0 2px 12px;
+  		}
+	100%
+		{
+    	background-color:#900;
+		box-shadow: #000 0 -1px 7px 1px, inset #f00 0 -1px 9px, #F00 0 2px 12px;
+  		}	
+	}
+
+.screen
+	{
+	height:320px;
+	width:288px;
+	margin: 0 auto;
+	padding:2px;
+	background-color:#0f380f;
+	border-bottom: 5px solid #ccc;
+	border-top: 5px solid #777;
+	border-left: 5px solid #666;
+	border-right: 5px solid #bbb;
+	}
+
+.mainRoom
+	{
+	background-image:url("\images/main_background.png");
+    background-size: cover;
+	color:#0f380f;
+	}
+
+.petDisplay
+	{
+	width:75px;
+	height:75px;
+	color:#0f380f;
+	background-color:#8bac0f;
+	border: 5px solid #306230;
+	padding:5px;
+	float:left;
+	}
+
+.petDisplay img
+	{
+	width:64px;
+	height:64px;
+	}
+
+.buttons
+	{
+	width:288px;
+	height:75px;
+	margin: 5% auto;
+	background-color:#666;
+	text-align: center;
+	border: 5px solid #444;
+	border-radius: 5%;
+	}
+
+.buttonStart
+	{
+	font-family: 'Press Start 2P', cursive;
+	height:25px;
+	width:85px;
+	cursor: pointer;
+	border-radius: 10%;
+	}
+
+.buttonRound
+	{
+	color:#666;
+	border-color:#222;
+	background-color:#333;
+	font-family: 'Press Start 2P', cursive;
+	font-weight: bold;
+	margin:1em;
+	height:50px;
+	width:50px;
+	padding:0em;
+	cursor: pointer;
+	border-radius: 50%;
+	}
+

@@ -1,0 +1,66 @@
+<html>
+<head>
+	<title>
+	Pet your pet
+	</title>
+	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  	<link rel="stylesheet" href="/styles.css">
+</head>
+
+	<body>
+
+	<center><h1> -- Virtual Pet Ver 1.0 -- </h1></center>
+
+	<div class = "gameboy" id ="app">
+
+		<div class = "powerRegion">
+			<div class = "power"></div>
+		</div>
+
+		<div v-if="gamestate === 'starting'">
+			<div class = "screen">
+			Virtual Pet VER 1.0
+			<br> Copywright 1990
+			<br>Vagrant Dragons
+			<br>Softworks
+			<br>
+			<br>-- Press Start --
+			</div>
+		</div>
+
+		<div v-else-if="gamestate === 'choose'">
+			<div class = "screen">
+				Choose pet type: A or B
+				<br>
+
+				<div class = "petDisplay">
+					A
+					<br><img src = "\images/Pet_A/default.png">
+				</div>
+
+				<div class = "petDisplay">
+					B
+					<br><img src = "\images/Pet_B/default.png">
+				</div>
+
+			</div>
+		</div>
+
+		<div v-else-if="gamestate === 'bedroom'">
+			<div class = "screen mainRoom">
+			Current Status: Healthy
+			</div>
+		</div>
+
+		<div class = "buttons">
+			<button class="buttonStart" v-on:click="pressedStart()">start</button>
+			<button class="buttonRound" v-on:click="pressedA()">A</button>
+			<button class="buttonRound" v-on:click="pressedB()">B</button>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
+	<script text="type/javascript" src="/script.js"></script>
+	</body>
+
+</html>
