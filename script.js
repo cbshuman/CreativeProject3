@@ -1,9 +1,9 @@
-let mainMenu =
+let foodMenu =
 	{
-	images:'/mainmenu/menu',
-	count:5,
+	images:'/food/food',
+	count:3,
 	current:1,
-	MoveRight()
+	MoveRight(app)
 		{
 		if(this.current == this.count)
 			{
@@ -13,8 +13,10 @@ let mainMenu =
 			{
 			this.current += 1;
 			}
+		app.currentMessage = this.functions[this.current-1].label;
 		},
-	MoveLeft()
+
+	MoveLeft(app)
 		{
 		if(this.current == 1)
 			{
@@ -24,39 +26,102 @@ let mainMenu =
 			{
 			this.current -= 1;
 			}
+		app.currentMessage = this.functions[this.current-1].label;
 		},
+
 	RunFunction(app)
 		{
 		//console.log(this.functions[this.current-1]);
-		this.functions[this.current-1](app);
+		this.functions[this.current-1].action(app);
 		},
 	functions :
 		[
-		//Medicine
-		function(app)
+		{label: "Back",action : function(app)
+			{
+			app.menu = mainMenu;
+			app.menu.current = 1;
+			}},
+		//Donut
+		{label: "Donut",action : function(app)
+			{
+			app.menu = mainMenu;
+			app.menu.current = 1;
+			app.pet.Feed(15,-5,5);
+			}},
+		//Veggie
+		{label: "Veggie",action : function(app)
+			{
+			app.menu = mainMenu;
+			app.menu.current = 1;
+			app.pet.Feed(15,5,-5);
+			}},
+		],
+	}
+
+let mainMenu =
+	{
+	images:'/mainmenu/menu',
+	count:5,
+	current:1,
+	MoveRight(app)
+		{
+		if(this.current == this.count)
+			{
+			this.current = 1;
+			}
+		else
+			{
+			this.current += 1;
+			}
+		app.currentMessage = this.functions[this.current-1].label;
+		},
+
+	MoveLeft(app)
+		{
+		if(this.current == 1)
+			{
+			this.current = this.count;
+			}
+		else
+			{
+			this.current -= 1;
+			}
+		app.currentMessage = this.functions[this.current-1].label;
+		},
+
+	RunFunction(app)
+		{
+		//console.log(this.functions[this.current-1]);
+		this.functions[this.current-1].action(app);
+		},
+	functions :
+		[
+		{label: "Medicine",action : function(app)
 			{
 			console.log("Opening stats. . .");
 			app.gamestate = 'stats';
-			},
+			}},
 		//Praise
-		function(app)
+		{label: "Praise",action : function(app)
 			{
 			app.pet.Praise();
-			},
+			}},
 		//Food
-		function(app)
+		{label: "Food",action : function(app)
 			{
-			},
+			app.menu = foodMenu;
+			app.menu.current = 1;
+			}},
 		//Stats
-		function(app)
+		{label: "Status",action : function(app)
 			{
 			//console.log("Opening stats. . .");
 			app.gamestate = 'stats';
-			},
+			}},
 		//Clean up
-		function(app)
+		{label: "Clean",action : function(app)
 			{
-			}
+			}},
 		],
 	}
 
@@ -67,6 +132,7 @@ let app = new Vue(
 	data:
 		{
 		gamestate : 'starting',
+		currentMessage : 'Default String',
 		timeout : 0,
 		menu:
 			{
@@ -83,17 +149,48 @@ let app = new Vue(
 			health: 100,
 			Praise()
 				{
-				this.happinness -=  Math.floor(Math.random() * 15);
-				if(this.happinness < 100)
+				this.happiness -=  Math.floor(Math.random() * 15);
+				if(this.happiness < 100)
 					{
 					this.happiness = 100;
 					}
-				console.log("Your pet is praised: " + this.happiness);
+				},
+			Feed(hungerModify, healthModify, happinessModify)
+				{
+				this.hunger += hungerModify;
+				this.health += healthModify;
+				this.happiness += happinessModify;
+
+				if(this.hunger > 100)
+					{
+					this.hunger = 100;
+					}
+				if(this.happiness > 100)
+					{
+					this.happiness = 100;
+					}
+				if(this.health > 100)
+					{
+					this.health = 100;
+					}
+
+				if(this.hunger < 0)
+					{
+					this.hunger = 0;
+					}
+				if(this.happiness < 0)
+					{
+					this.happiness = 0;
+					}
+				if(this.health < 0)
+					{
+					this.health = 0;
+					}
 				},
 			Update()
 				{
 				let seed = Math.floor(Math.random() * 100);
-				if(seed >= 75)
+				if(seed >= 90)
 					{
 					this.hunger -= Math.floor(Math.random() * 5);
 					this.happiness -= Math.floor(Math.random() * 3);
@@ -114,7 +211,11 @@ let app = new Vue(
 				},
 			GetHeath()
 				{
-				if(this.hunger < 50)
+				if(this.health < 50)
+					{
+					return('sick');
+					}
+				else if(this.hunger < 50)
 					{
 					return('hungry');
 					}
@@ -137,6 +238,7 @@ let app = new Vue(
 			if(this.gamestate === 'bedroom')
 				{
 				this.menu = mainMenu;
+				this.currentMessage = 'Bedroom';
 				}
 			}
 		},
@@ -201,7 +303,7 @@ let app = new Vue(
 				}
 			else if(this.gamestate === 'bedroom')
 				{
-				this.menu.MoveLeft();
+				this.menu.MoveLeft(this);
 				}
 			},
 		//Input from B button
@@ -215,7 +317,7 @@ let app = new Vue(
 				}
 			else if(this.gamestate === 'bedroom')
 				{
-				this.menu.MoveRight();
+				this.menu.MoveRight(this);
 				}
 			},
 		}

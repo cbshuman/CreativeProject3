@@ -48,7 +48,7 @@
 
 		<div v-else-if="gamestate === 'bedroom'">
 			<div class = "screen mainRoom">
-			Current Status: {{pet.GetHeath()}}
+				{{currentMessage}}
 				<div id = "pet" class = "pet">
 					<img v-bind:src= "pet.image + pet.behavior + pet.currentFrame + '.png'">
 				</div>
@@ -68,6 +68,12 @@
 			<br>Heath : {{pet.health}}
 			<br>Happiness : {{pet.happiness}}
 			<br>Hunger : {{pet.hunger}}
+			<br>
+			<br>Current Status: {{pet.GetHeath()}}
+			<br>
+			<br> --Press Start
+			<br> --To Return
+			<br> --To the Bedroom
 			</div>
 		</div>
 
@@ -77,6 +83,14 @@
 			<button class="buttonRound" v-on:click="pressedB()">B</button>
 		</div>
 	</div>
+	<center>
+		<p>
+		Take good care of your pet!
+		<br>Be sure to feed it, and keep it happy!
+		<br>
+		<br><a href = "https://github.com/cbshuman/CreativeProject3"><img src = "images/git.png"></a>
+		</p>
+	</center>
 
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
 	<script text="type/javascript" src="/script.js"></script>
