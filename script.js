@@ -1,6 +1,6 @@
 let foodMenu =
 	{
-	images:'/food/food',
+	images:'/mainmenu/food',
 	count:3,
 	current:1,
 	MoveRight(app)
@@ -44,6 +44,7 @@ let foodMenu =
 		//Donut
 		{label: "Donut",action : function(app)
 			{
+			app.currentMessage = 'Fed Donut!';
 			app.menu = mainMenu;
 			app.menu.current = 1;
 			app.pet.Feed(15,-5,5);
@@ -51,6 +52,7 @@ let foodMenu =
 		//Veggie
 		{label: "Veggie",action : function(app)
 			{
+			app.currentMessage = 'Fed Veggie!';
 			app.menu = mainMenu;
 			app.menu.current = 1;
 			app.pet.Feed(15,5,-5);
@@ -98,12 +100,14 @@ let mainMenu =
 		[
 		{label: "Medicine",action : function(app)
 			{
-			console.log("Opening stats. . .");
-			app.gamestate = 'stats';
+			app.currentMessage = 'Gave a shot!';
+			app.pet.Medicate();
+			app.menu.current = 1;
 			}},
 		//Praise
 		{label: "Praise",action : function(app)
 			{
+			app.currentMessage = 'Pleased your pet!';
 			app.pet.Praise();
 			}},
 		//Food
@@ -121,6 +125,7 @@ let mainMenu =
 		//Clean up
 		{label: "Clean",action : function(app)
 			{
+			app.currentMessage = 'Cleaned up mess!';
 			}},
 		],
 	}
@@ -153,6 +158,17 @@ let app = new Vue(
 				if(this.happiness < 100)
 					{
 					this.happiness = 100;
+					}
+				},
+			Medicate()
+				{
+				if(this.health < 50)
+					{
+					this.health = 100;
+					}
+				else
+					{
+					this.health = 50;
 					}
 				},
 			Feed(hungerModify, healthModify, happinessModify)
