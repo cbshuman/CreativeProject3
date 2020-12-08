@@ -1,3 +1,3 @@
 # CreativeProject3
 
-Old school project, meant to emulate old digital pet projects.
+Old school project, meant to emulate digital pet keychains in a web-browser.
